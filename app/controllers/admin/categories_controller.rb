@@ -24,8 +24,8 @@ class Admin::CategoriesController < Admin::BaseController
   private
 
   def new_or_edit
-    @categories = Category.find(:all)
-    if(params[:id] != null)
+    if(params &&params.has_key?(:id) && !params[:id].nil? && params[:id])
+      @categories = Category.find(:all)
       @category = Category.find(params[:id])
       @category.attributes = params[:category]
       if request.post?
